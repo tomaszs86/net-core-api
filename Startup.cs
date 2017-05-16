@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using net_core_api.Models;
+using api.net_core_api;
+using net_core_api.DTO;
+using net_core_api.Repositories;
 
 namespace net_core_api
 {
@@ -27,15 +32,29 @@ namespace net_core_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<NetCoreApiContext>(opt => opt.UseInMemoryDatabase());
             // Add framework services.
             services.AddMvc();
+
+            services.AddScoped<IProductRepository, ProductRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, NetCoreApiContext netCoreApiContext)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            netCoreApiContext.EnsureSeedDataForContext();
+
+            app.UseStatusCodePages();
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Product, ProductDTO>();                    
+                cfg.CreateMap<ProductDTO, Product>();                
+            });
 
             app.UseMvc();
         }
