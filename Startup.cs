@@ -37,6 +37,7 @@ namespace net_core_api
             services.AddMvc();
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             
         }
 
@@ -52,8 +53,10 @@ namespace net_core_api
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Product, ProductDTO>();                    
-                cfg.CreateMap<ProductDTO, Product>();                
+                cfg.CreateMap<Product, ProductDTO>();                
+                cfg.CreateMap<Category, CategoryDTO>();  
+                cfg.CreateMap<CategoryDTO, Category>();    
+                cfg.CreateMap<ProductDTO, Product>();                    
             });
 
             app.UseMvc();

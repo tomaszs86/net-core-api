@@ -18,8 +18,18 @@ namespace net_core_api.Models
             }
 
             var products = new List<Product>() {
-                new Product() { Name = "Mirror"},                
-                new Product() { Name = "Iron"}
+                new Product() { Name = "Coca Cola",
+                Categories = new List<Category>()
+                     {
+                         new Category() {
+                             Name = "Drinks"
+                         },
+                          new Category() {
+                             Name = "Soft Drinks"
+                          }
+                     }                
+                 },
+                new Product() { Name = "Sprite" }
             };
 
             context.Products.AddRange(products);

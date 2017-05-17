@@ -23,7 +23,7 @@ namespace net_core_api.Repositories
 
         public IEnumerable<Product> GetAll()
         {
-            return _context.Products.ToList();
+            return _context.Products.Include(c=>c.Categories).ToList();
         }
     }
 }
