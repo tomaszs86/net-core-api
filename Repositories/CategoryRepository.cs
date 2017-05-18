@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.net_core_api;
 using Microsoft.EntityFrameworkCore;
 using net_core_api.Models;
 
@@ -10,7 +9,8 @@ namespace net_core_api.Repositories
 {
     public interface ICategoryRepository
     {
-        Task<List<Category>> GetAll();        
+        Task<List<Category>> GetAll();  
+        Task<int> Add(Category category);      
     }
 
     public class CategoryRepository : ICategoryRepository
@@ -26,5 +26,14 @@ namespace net_core_api.Repositories
         {
             return await _context.Categories.Include(c=>c.Product).ToListAsync();
         }
+
+        public async Task<int> Add(Category category) {
+            
+            _context.Entry(category).State = EntityState.Added;
+            int result = await (_context.SaveChangesAsync());
+
+            return result;
+
+        }    
     }
 }

@@ -13,6 +13,12 @@ namespace net_core_api.DTO
         [MaxLength(10)]        
         public string Name { get; set; }    
 
+        public decimal Price {get; set;}
+
+        public bool IsActive {get; set;}
+
+        public string Description {get; set;}
+
          public int NumberOfCategories { get
             {
                 return Categories.Count;

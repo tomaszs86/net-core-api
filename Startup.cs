@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using net_core_api.Models;
-using api.net_core_api;
 using net_core_api.DTO;
 using net_core_api.Repositories;
 

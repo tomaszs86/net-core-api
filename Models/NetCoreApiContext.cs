@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.net_core_api;
+using net_core_api.Models;
 
 namespace net_core_api.Models
 {
