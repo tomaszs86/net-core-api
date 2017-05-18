@@ -9,3 +9,11 @@ http://localhost:5050/api/product - POST (headers: Content-Type: application/jso
     "description": "test"
 }
 
+http://localhost:5050/api/product/3 - PUT
+
+{
+    "key": 3,
+    "name": "modified",
+    "isActive": true,
+    "description": "test-modification"
+}
